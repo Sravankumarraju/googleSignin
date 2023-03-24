@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Google Sign in</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function onSignIn(googleUser) {
+            const responsePayload = decodeJwtResponse(googleUser.credential);
+            let google_email = responsePayload.email
+            console.log("google_email - ",google_email)
+        }
+        function decodeJwtResponse(data) {
+            let tokens = data.split(".");
+            return JSON.parse(atob(tokens[1]))
+        }
+    </script>
+</head>
+<body>
+    <div class="login">
+        <div id="g_id_onload" data-client_id="enter-your-client-id"
+            data-context="signin" data-ux_mode="popup" data-login_uri="" data-callback="onSignIn"
+            data-itp_support="true">
+        </div>
+        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin"
+            data-size="large" data-logo_alignment="left">
+        </div>
+    </div>
+    </div>
+</body>
+</html>
